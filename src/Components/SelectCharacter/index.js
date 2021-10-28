@@ -2,18 +2,15 @@ import React, { useEffect, useState } from 'react';
 import './SelectCharacter.css';
 import { ethers } from 'ethers';
 import { CONTRACT_ADDRESS, transformCharacterData } from '../../constants';
-import myEpicGame from '../../utils/MyEpicGame.json';
+import MyEpicGame from '../../utils/MyEpicGame.json';
 
+/*
+ * Don't worry about setCharacterNFT just yet, we will talk about it soon!
+ */
 const SelectCharacter = ({ setCharacterNFT }) => {
   const [characters, setCharacters] = useState([]);
   const [gameContract, setGameContract] = useState(null);
-
-  return (
-    <div className="select-character-container">
-      <h2>Mint Your Hero. Choose wisely.</h2>
-    </div>
-  );
-// UseEffect
+  // UseEffect
 useEffect(() => {
   const { ethereum } = window;
 
@@ -22,7 +19,7 @@ useEffect(() => {
     const signer = provider.getSigner();
     const gameContract = new ethers.Contract(
       CONTRACT_ADDRESS,
-      myEpicGame.abi,
+      MyEpicGame.abi,
       signer
     );
 
@@ -70,8 +67,12 @@ useEffect(() => {
   }
 }, [gameContract]);
 
+  return (
+    <div className="select-character-container">
+      <h2>Mint Your Hero. Choose wisely.</h2>
+    </div>
+  );
 
 };
 
 export default SelectCharacter;
-
