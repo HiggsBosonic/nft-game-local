@@ -17,25 +17,3 @@ const SelectCharacter = ({ setCharacterNFT }) => {
 
 export default SelectCharacter;
 
-
-// UseEffect
-useEffect(() => {
-  const { ethereum } = window;
-
-  if (ethereum) {
-    const provider = new ethers.providers.Web3Provider(ethereum);
-    const signer = provider.getSigner();
-    const gameContract = new ethers.Contract(
-      CONTRACT_ADDRESS,
-      myEpicGame.abi,
-      signer
-    );
-
-    /*
-     * This is the big difference. Set our gameContract in state.
-     */
-    setGameContract(gameContract);
-  } else {
-    console.log('Ethereum object not found');
-  }
-}, []);
